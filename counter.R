@@ -16,9 +16,10 @@ ui <- fluidPage(
 )
 
 server <- function(input, output, session) {
-  # TODO: Create reactiveVal to store the count
+  numbers <- reactiveVal(0)
+  textOutput("numbers")
   
-  # TODO: Define an observer to update count based on button clicks
+  #observeEvent(input$inc)
   
   # TODO: Render the current count
 }
