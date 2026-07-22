@@ -6,6 +6,7 @@ ui <- fluidPage(
   sidebarLayout(
     sidebarPanel(
       actionButton("inc", "Increment"),
+      actionButton("dec", "Decrement")
     ),
     
     mainPanel(
@@ -21,6 +22,9 @@ server <- function(input, output, session) {
   
   observeEvent(input$inc, {
     numbers(numbers() + 1)
+  })
+  observeEvent(input$dec, {
+    numbers(numbers() - 1)
   })
   
   output$count <- renderText({
