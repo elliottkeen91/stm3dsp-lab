@@ -8,7 +8,9 @@ ui <- fluidPage(
       actionButton("inc", "Increment"),
       actionButton("dec", "Decrement"),
       actionButton("res", "Reset"),
-      numericInput("amt", "amount", 1, step = 1)
+      numericInput("amt", "amount", 1, step = 1),
+      numericInput("usrIn", "User Input", 0, min = 0, step = 1),
+      actionButton("set", "Set")
     ),
     
     mainPanel(
@@ -20,6 +22,11 @@ ui <- fluidPage(
 
 server <- function(input, output, session) {
   numbers <- reactiveVal(0)
+  
+  observeEvent(input$set, {
+    numbers(input$usrIn)
+  })
+  
   textOutput("numbers")
   
   observeEvent(input$inc, {
