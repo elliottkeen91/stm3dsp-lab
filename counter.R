@@ -6,7 +6,7 @@ ui <- fluidPage(
   sidebarLayout(
     sidebarPanel(
       actionButton("inc", "Increment"),
-      actionButton("dec", "Decrement"),
+      actionButton("dec", "Decrement", disabled = FALSE),
       actionButton("res", "Reset"),
       numericInput("amt", "amount", 1, step = 1),
       numericInput("usrIn", "User Input", 0, min = 0, step = 1),
@@ -22,6 +22,14 @@ ui <- fluidPage(
 
 server <- function(input, output, session) {
   numbers <- reactiveVal(0)
+
+  
+  observe({
+    if (numbers() == 0) {
+     updateActionButton(session, "dec", disabled = TRUE)
+    }else { 
+      updateActionButton(session, "dec", disabled = FALSE)}
+  })
   
   observeEvent(input$set, {
     numbers(input$usrIn)
@@ -35,6 +43,8 @@ server <- function(input, output, session) {
 
   observeEvent(input$dec, {
     numbers(max(0,numbers() - input$amt))
+
+    
   })
   
  
