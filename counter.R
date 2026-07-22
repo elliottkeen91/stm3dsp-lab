@@ -26,7 +26,7 @@ server <- function(input, output, session) {
     numbers(numbers() + input$amt)
   })
   observeEvent(input$dec, {
-    numbers(numbers() - input$amt)
+    numbers(max(0,numbers() - input$amt))
   })
   
  
