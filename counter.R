@@ -19,10 +19,13 @@ server <- function(input, output, session) {
   numbers <- reactiveVal(0)
   textOutput("numbers")
   
-  #observeEvent(input$inc)
+  observeEvent(input$inc, {
+    numbers(numbers() + 1)
+  })
   
-  # TODO: Render the current count
+  output$count <- renderText({
+    numbers()
+  })
 }
-
 
 shinyApp(ui, server)
