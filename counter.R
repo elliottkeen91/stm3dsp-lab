@@ -7,7 +7,8 @@ ui <- fluidPage(
     sidebarPanel(
       actionButton("inc", "Increment"),
       actionButton("dec", "Decrement"),
-      actionButton("res", "Reset")
+      actionButton("res", "Reset"),
+      numericInput("amt", "amount", 1, step = 1)
     ),
     
     mainPanel(
@@ -22,12 +23,13 @@ server <- function(input, output, session) {
   textOutput("numbers")
   
   observeEvent(input$inc, {
-    numbers(numbers() + 1)
+    numbers(numbers() + input$amt)
   })
   observeEvent(input$dec, {
-    numbers(numbers() - 1)
+    numbers(numbers() - input$amt)
   })
   
+ 
   observeEvent(input$res, {
     numbers(0)
   })
